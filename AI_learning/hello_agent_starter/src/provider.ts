@@ -16,7 +16,7 @@ async function helloOpenAi(): Promise<HelloOutput> {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) throw new Error("OPENAI_API_KEY is not set");
 
-    const model = "gpt-4o-nano";
+    const model = "gpt-4o-mini";
     const url = `https://api.openai.com/v1/chat/completions`;
 
     const response = await fetch(url, {
