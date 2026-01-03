@@ -1,4 +1,4 @@
-import { RunnableLambda } from "@langchain/core/runnables";
+import { RunnableLambda, RunnableSequence } from "@langchain/core/runnables";
 import { webSearch } from "../utils/webSearch";
 import { openUrl } from "../utils/openUrl";
 import { summarise } from "../utils/summarise";
@@ -73,7 +73,7 @@ export const stepCompose = RunnableLambda.from(
         const model = getChatModel({ temperature: 0.2 });
         if (!input.pageSummaries || input.pageSummaries.length === 0) {
             const directResponseFromModel = await model.invoke([
-                new SystemMessage(
+                new SystemMessage(  
                     [
                         "You answer briefly and clearly for beginners",
                         "If unsure, say so"
@@ -130,3 +130,8 @@ export const stepCompose = RunnableLambda.from(
 )
 
 
+export const webBasedPath = RunnableSequence.from([
+    webSearchStep,
+    openAndSummarizeStep,
+    stepCompose
+])

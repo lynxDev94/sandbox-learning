@@ -1,6 +1,6 @@
 
 export type candidate = {
     answer: string;
-    sources: [];
+    sources: [] | any;
     mode: 'web' | "direct";
 }
